@@ -1,0 +1,50 @@
+package self.learning;
+
+public class Try_enum 
+{
+	// 枚举类型的创建
+	public enum Money
+	{
+		YI("壹圆", 1), ER("贰圆", 2), WU("伍圆", 5), SY("拾圆", 10), ES("贰拾圆", 20), WS("伍拾圆", 50);
+		private String name;
+		private int index;
+		private Money(String name, int index)
+		{
+			this.name = name;
+			this.index = index;
+		}
+		// get set
+		public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+        
+        public static String getName(int index)
+        {
+        	for(Money m : Money.values())
+        	{
+        		if (m.getIndex() == index)
+        		{
+        			
+        		}
+        	}
+        }
+	}
+	
+	public static void main(String[] args)
+	{
+		;
+	}
+}
+

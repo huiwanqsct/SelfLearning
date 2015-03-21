@@ -1,0 +1,22 @@
+package First;
+
+public class Hello
+{
+	private int number;
+	
+	public static void main(String[] argv)
+	{
+		World w = new World();
+		System.out.println("HelloWorld");
+		System.out.println(w.word);
+	}
+}
+
+class World
+{
+	private int word;
+	public World()
+	{
+//		world = 100;
+	}
+}

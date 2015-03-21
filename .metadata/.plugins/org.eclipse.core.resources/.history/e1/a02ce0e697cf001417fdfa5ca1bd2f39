@@ -1,0 +1,11 @@
+package self.learning;
+
+public enum NumReading
+{
+	"亿", "万", "千"
+}；
+
+public class Try_enum 
+{
+	
+}

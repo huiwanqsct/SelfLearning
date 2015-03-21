@@ -1,0 +1,14 @@
+package self.learning;
+
+public class Try_enum 
+{
+	public enum Money
+	{
+		
+	}
+	public static void main(String[] args)
+	{
+		;
+	}
+}
+

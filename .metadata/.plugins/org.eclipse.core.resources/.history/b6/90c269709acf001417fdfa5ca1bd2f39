@@ -1,0 +1,12 @@
+package self.learning;
+
+public enum Try_enum 
+{
+	RED, Green
+}
+	public static void main(String[] args)
+	{
+		;
+	}
+}
+

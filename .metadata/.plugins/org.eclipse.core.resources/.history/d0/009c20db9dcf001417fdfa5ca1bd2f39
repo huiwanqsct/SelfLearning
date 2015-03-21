@@ -1,0 +1,14 @@
+package self.learning;
+
+// 枚举类型的使用
+public class Try_enum 
+{	
+	public static void main(String[] args)
+	{
+		for (Money m : Money.values())
+		{
+			
+		}
+	}
+}
+

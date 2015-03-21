@@ -1,0 +1,11 @@
+package self.learning;
+
+public enum NumReading
+{
+	
+}；
+
+public class Try_enum 
+{
+	
+}

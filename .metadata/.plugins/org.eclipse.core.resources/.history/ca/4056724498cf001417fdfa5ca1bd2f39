@@ -1,0 +1,11 @@
+package self.learning;
+
+public class Try_enum 
+{
+	public static void main(String args[])
+}
+
+public enum NumReading
+{
+	12, 23, 35
+}
