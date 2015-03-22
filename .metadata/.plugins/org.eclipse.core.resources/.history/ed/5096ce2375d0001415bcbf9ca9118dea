@@ -4,7 +4,6 @@
 // 有关String[] args: java 可执行文件名 串 正则表达式1 正则表达式2 ... 
 // 其中args[0]表示的是串
 // 第一次循环把串本身当成了一个正则表达式
-// 加入了java.io的使用
 package pattern_try;
 
 import java.util.regex.Pattern;
@@ -30,7 +29,7 @@ public class NormalPattern
 		{
 			System.out.println("Regular expression: \"" + arg + "\"");
 			Pattern p = Pattern.compile(arg);
-			Matcher m = p.matcher(str);
+			Matcher m = p.matcher((str);
 			while (m.find())
 			{
 				System.out.println("Match \"" + m.group() + "\" at positions " + m.start() + "-" + (m.end() - 1));

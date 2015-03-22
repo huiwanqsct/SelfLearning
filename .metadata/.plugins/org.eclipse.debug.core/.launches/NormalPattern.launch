@@ -7,6 +7,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="pattern_try.NormalPattern"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="adcadccccadcrbgadc adc+ (adc)+ (adc){2,}"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="adc+ (adc)+ (adc){2,}"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="pattern_try"/>
 </launchConfiguration>
