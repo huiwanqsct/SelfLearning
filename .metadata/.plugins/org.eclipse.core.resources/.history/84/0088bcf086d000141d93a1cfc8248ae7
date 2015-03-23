@@ -1,0 +1,11 @@
+package self.chinese.api;
+
+public enum Number0_9 {
+	("零", 0);
+	private String name;
+	private int number;
+	public Number()
+	{
+		
+	}
+}

@@ -9,6 +9,7 @@ public class Try_enum
 		{
 			System.out.println(m + ", ordinal " + m.ordinal());
 		}
+		System.out.println(Money.getName(5));
 		Money m = Money.YI;
 		switch(m)
 		{

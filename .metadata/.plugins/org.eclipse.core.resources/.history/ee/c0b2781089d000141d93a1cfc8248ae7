@@ -1,0 +1,5 @@
+package self.chinese.api;
+
+public enum ChineseRead {
+
+}

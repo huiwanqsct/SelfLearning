@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="ast.Ast.Method.T"/>
-<fullyQualifiedTypeName name="ast.Ast.Method"/>
 <fullyQualifiedTypeName name="ast.Ast.Exp.Lt"/>
 <fullyQualifiedTypeName name="com.sun.corba.se.impl.protocol.AddressingDispositionException"/>
 <fullyQualifiedTypeName name="util.Flist"/>
@@ -56,8 +54,10 @@
 <fullyQualifiedTypeName name="codegen.C.Ast.Dec.DecSingle"/>
 <fullyQualifiedTypeName name="ast.Ast.Dec.DecSingle"/>
 <fullyQualifiedTypeName name="codegen.C.Tuple"/>
-<fullyQualifiedTypeName name="java.util.regex.Matcher"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="java.util.regex.Pattern"/>
+<fullyQualifiedTypeName name="java.util.regex.Matcher"/>
+<fullyQualifiedTypeName name="self.chinese.api.Number0_9"/>
 </qualifiedTypeNameHistroy>

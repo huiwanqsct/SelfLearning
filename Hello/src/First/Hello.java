@@ -15,11 +15,16 @@ public class Hello
 		World w = new World();
 		System.out.println("HelloWorld");
 		System.out.println("word is " + w.word);
-		// 尝试使用输入流InputStream
-		System.out.println("Please input a line!");
-		BufferedReader lineOfText = new BufferedReader(new InputStreamReader(System.in));
-		String textLine = lineOfText.readLine();
-		System.out.println(textLine);
+		// 尝试使用输入流InputStream, 去掉注释即可用
+//		System.out.println("Please input a line!");
+//		BufferedReader lineOfText = new BufferedReader(new InputStreamReader(System.in));
+//		String textLine = lineOfText.readLine();
+//		System.out.println(textLine);
+		
+		// 尝试使用一个数组接受String类型的转换函数的结果
+		String str = new String("Hello World!");
+		char[] chr = str.toCharArray();
+		System.out.println("char array length is " + chr.length);
 	}
 }
 
