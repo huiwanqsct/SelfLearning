@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class Change {
 	private String result;
+	private String input;
 	public final String X = "(0|1|2|3|4|5|6|7|8|9)";
 	public final String Y = "(1|2|3|4|5|6|7|8|9)";
 	
@@ -15,7 +16,8 @@ public class Change {
 	}
 	public Change (String input)
 	{
-		this.result = input;
+		this.result = "";
+		this.input = input;
 	}
 	
 	// 传入一个字符串， 如果匹配正则表达式regular则返回true, 反之返回false
@@ -50,15 +52,81 @@ public class Change {
 	}
 	
 	// 把输入长度大于4位的串进行切分，结果放到数组里;
+	// 分类方法： 串的长度能否被4整除
 	public String[] cuttingIntoPieces(String str)
 	{
 		String[] pieces = null;
 		int i = 0;
+		int numberFirstString = str.length()%4;
 		int numberOfPieces = str.length()/4;
-		for (i = 0; i < numberOfPieces; i++)
+//		System.out.println("numberFirstString is " + numberFirstString);
+//		System.out.println("numberOfPieces is " + numberOfPieces);
+		if (numberFirstString == 0)
 		{
-			
+			switch (numberOfPieces)
+			{
+			case 1: pieces = new String[1]; 
+					pieces[0] = str.substring(0, 4); 
+					break;
+			case 2: pieces = new String[2]; 
+					for (i = 0; i < 2; i++)
+					{
+						pieces[i] = str.substring(4 * i, 4 + 4 * i);
+					}
+					break;
+			case 3: pieces = new String[3]; 
+					for (i = 0; i < 3; i++)
+					{
+						pieces[i] = str.substring(4 * i, 4 + 4 * i);
+					}
+					break;
+			case 4: pieces = new String[4]; 
+					for (i = 0; i < 4; i++)
+					{
+						pieces[i] = str.substring(4 * i, 4 + 4 * i);
+					}
+					break;
+			default: 
+				 	System.out.println("Error: The number can not be cutted into pieces!");
+				 	System.exit(-1);
+				 	break;
+			}
 		}
+		else
+		{
+//			System.out.println("firstStringEnd is " + firstStringEnd);
+			switch(numberOfPieces)
+			{
+			case 0: pieces = new String[1]; 
+					pieces[0] = str.substring(0, numberFirstString);					
+					break;
+			case 1: pieces = new String[2]; 
+					pieces[0] = str.substring(0, numberFirstString);
+//					System.out.println("FirstString is " + pieces[0]);
+				 	for (i = 1; i < 2; i++)
+				 	{
+				 		pieces[i] = str.substring(numberFirstString + 4 * i - 4, numberFirstString + 4 * i);
+				 	}
+				 	break;
+			case 2: pieces = new String[3]; 
+					pieces[0] = str.substring(0, numberFirstString);
+					for (i = 1; i < 3; i++)
+					{
+						pieces[i] = str.substring(numberFirstString + 4 * i - 4, numberFirstString + 4 * i);
+					}
+					break;
+			case 3: pieces = new String[4]; 
+					pieces[0] = str.substring(0, numberFirstString);
+					for (i = 1; i < 4; i++)
+					{
+						pieces[i] = str.substring(numberFirstString + 4 * i - 4, numberFirstString + 4 * i);
+					}
+					break;
+			}
+		}
+//		System.out.println("Pieces[0] " + pieces[0]);
+//		System.out.println("Pieces[1] " + pieces[1]);
+//		System.out.println("Pieces[2] " + pieces[2]);
 		return pieces;
 	}
 	
@@ -107,6 +175,7 @@ public class Change {
 	{
 		String reading = "";
 		char[] chr;
+//		System.out.println("Reading3 " + str);
 		if (str.length() != 3)
 		{
 			System.out.println("Error:Input not 3 letters!");
@@ -244,6 +313,7 @@ public class Change {
 //		null用来表示没有实例存在，而“”本身就是一个实例，有自己的对象空间，和“123456”这样的字符串没有区别
 		
 		String reading = "";
+//		System.out.println("Reading4_Other " + str);
 		char[] chr = str.toCharArray();
 		for (i = 0; i < 4; i++)
 		{
@@ -261,15 +331,80 @@ public class Change {
 	}
 	
 	// 总的转换过程
-	public void getResult(String str)
+	public void getResult()
 	{
+		String str = this.input;
 		String reading = "";
+		String[] pieces = this.cuttingIntoPieces(str);
+		int numberOfP = pieces.length;
+		int n = pieces[0].length();
+		int i = 0;
+		
+		// 如果输入的数不合法
+		if (!this.checkInput(str))
+		{
+			System.out.println("Error: checkInput error!");
+			System.exit(-1);
+		}
+		
+		// 先处理pieces[0]
+		switch (n)
+		{
+		case 1: reading += this.reading1(pieces[0]); break;
+		case 2: reading += this.reading2(pieces[0]); break;
+		case 3: reading += this.reading3(pieces[0]); break;
+		case 4: reading += this.reading4(pieces[0]); break;
+		default: reading = null;
+				 System.out.println("Error: in first pieces");
+				 break;
+		}
+		
+		// 再根据切出来的String的个数来考虑加上"萬"...
+		switch (numberOfP)
+		{
+		case 1: break;
+		case 2: reading += "萬";
+				for (i = 1; i < numberOfP; i++)
+				{
+					reading += this.reading4(pieces[i]);
+				}
+				break;
+		case 3: reading += "億";
+				for (i = 1; i < numberOfP; i++)
+				{
+					reading += this.reading4(pieces[i]);
+					if (i == 1)
+					{
+						reading += "萬";
+					}
+				}
+				break;
+		case 4: reading += "萬";
+				for (i = 1; i < numberOfP; i++)
+				{
+					reading += this.reading4(pieces[i]);
+					if (i == 1)
+					{
+						reading += "億";
+					}
+					else if (i == 2)
+					{
+						reading += "萬";
+					}
+					else
+					{
+						;
+					}
+				}
+				break;
+		default: System.out.println("Error: the numberOfP is not 1, 2, 3, 4");
+		}
 		this.result = reading;
 	}
 	
 	// 仅仅打印出结果
-	public String outPut()
+	public void outPut()
 	{
-		return this.result;
+		System.out.println(this.result);
 	}
 }
