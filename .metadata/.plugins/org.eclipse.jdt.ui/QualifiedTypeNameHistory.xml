@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="ast.Ast.Exp.Lt"/>
-<fullyQualifiedTypeName name="com.sun.corba.se.impl.protocol.AddressingDispositionException"/>
 <fullyQualifiedTypeName name="util.Flist"/>
 <fullyQualifiedTypeName name="ast.Ast.Stm.Block"/>
 <fullyQualifiedTypeName name="jdk.nashorn.internal.ir.Block"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
 <fullyQualifiedTypeName name="java.util.regex.Matcher"/>
 <fullyQualifiedTypeName name="self.chinese.api.Number0_9"/>
+<fullyQualifiedTypeName name="self.exercise.GenericStack"/>
+<fullyQualifiedTypeName name="java.lang.Number"/>
 </qualifiedTypeNameHistroy>

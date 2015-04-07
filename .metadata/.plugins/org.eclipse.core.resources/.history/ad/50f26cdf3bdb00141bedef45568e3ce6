@@ -1,0 +1,7 @@
+package self.exercise;
+
+public class GenericStack<E> {
+	private final static int arraySize = 2;
+	private char[] arraylist = new char[arraySize];
+	
+}

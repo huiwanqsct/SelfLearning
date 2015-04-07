@@ -10,7 +10,7 @@ public class NumberReading
 	public static void main(String[] args) throws IOException
 	{
 		// 输入
-		System.out.println("Please input a big data which contains less than 16 numbers!");
+		System.out.println("Please input a big data which contains less than 19 (include .) numbers!");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String input = br.readLine();
 		System.out.println("It can be read as follow:");

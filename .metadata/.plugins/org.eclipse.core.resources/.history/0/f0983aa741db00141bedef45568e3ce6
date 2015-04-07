@@ -1,0 +1,23 @@
+// 泛型类型的3条限制
+// new E(); new E[]; static修饰; public class Myexception<T> extends Exception
+package self.exercise;
+
+public class GenericStack<E> {
+	private final static int arraySize = 2;
+	private E[] arraylist = (E[])new Object[arraySize];
+	public GenericStack()
+	{
+		for (int i = 0; i < arraySize; i++)
+		{
+			arraylist[i] = null;
+		}
+	}
+	public int getSize()
+	{
+		return arraylist.length;
+	}
+	public E peek()
+	{
+		
+	}
+}

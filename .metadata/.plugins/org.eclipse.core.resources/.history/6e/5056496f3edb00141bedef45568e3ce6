@@ -1,0 +1,13 @@
+package self.exercise;
+
+public class GenericStack<E> {
+	private final static int arraySize = 2;
+	private char[] arraylist = new char[arraySize];
+	public GenericStack()
+	{
+		for (int i = 0; i < arraySize; i++)
+		{
+			arraylist[i] = 0;
+		}
+	}
+}

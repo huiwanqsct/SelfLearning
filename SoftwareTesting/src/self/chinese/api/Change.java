@@ -6,6 +6,13 @@ import java.util.regex.Pattern;
 public class Change {
 	private String result;
 	private String input;
+	
+	// 专门设置一个私有标志来处理"￥107000.53，应写成：人民币壹拾万零柒仟元伍角叁分" 里面的那个"零", true则要加"零"
+	private boolean tag = false; 
+	
+	// 专门设置一个私有标志来处理"0.23", 保证不会读出零圆, 第一位是0则改为true
+	private boolean yuan = false;
+	
 	public final String X = "(0|1|2|3|4|5|6|7|8|9)";
 	public final String Y = "(1|2|3|4|5|6|7|8|9)";
 	
@@ -27,64 +34,91 @@ public class Change {
 		Pattern p = Pattern.compile(regular);
 		Matcher m = p.matcher(str);
 		
-		if (m.find())
+		if (m.matches())
 		{
+//			System.out.println("matcher group " + m.group());
+//			System.out.println("matcher start " + m.start());
+//			System.out.println("matcher end " + m.end());
 			result = true;
 		}
 		return result;
 	}
 	
 	// 检查输入的正则合法性和位数
-	public boolean checkInput(String str)
+	public boolean checkInput(String str0)
 	{
 		boolean result = false;
+		String str = str0.substring(1, str0.length());
 		int length = str.length();
-		if (length == 0 || length > 16)
+		if (length == 0 || length > 19)
 		{
 			System.out.println("Error:Input more or less numbers!");
 			return result;
 		}
-		if (matching(str, Y + "|" + X + "*"))
+		
+		// ￥1400.58, 0.53 
+		if (str0.charAt(0) != '￥')
+		{
+			System.out.println("Error: You must input a number begin with ￥");
+			return result;
+		}
+		
+		// 合法正则表达式为: 0|(1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)*
+		if (matching(str, "0" + "|" + Y + X + "*" + "\\." + X + X))
 		{
 			result = true;
+		}
+		else
+		{
+			System.out.println("Error: You must input a number like this ￥1005.23");
 		}
 		return result;
 	}
 	
 	// 把输入长度大于4位的串进行切分，结果放到数组里;
 	// 分类方法： 串的长度能否被4整除
-	public String[] cuttingIntoPieces(String str)
+	public String[] cuttingIntoPieces(String str0)
 	{
+		// 排除第一个输入的￥符号
+		String str = str0.substring(1, str0.length());
 		String[] pieces = null;
 		int i = 0;
-		int numberFirstString = str.length()%4;
-		int numberOfPieces = str.length()/4;
+		
+		// 排除小数点的干扰
+		int numberFirstString = (str.length() - 3)%4;
+		int numberOfPieces = (str.length() - 3)/4;
 //		System.out.println("numberFirstString is " + numberFirstString);
 //		System.out.println("numberOfPieces is " + numberOfPieces);
+//		System.out.println("str is " + str);
+		// 4的倍数位数字
 		if (numberFirstString == 0)
 		{
 			switch (numberOfPieces)
 			{
-			case 1: pieces = new String[1]; 
-					pieces[0] = str.substring(0, 4); 
+			case 1: pieces = new String[2]; 
+					pieces[0] = str.substring(0, 4);
+					pieces[1] = str.substring(5, 7);
 					break;
-			case 2: pieces = new String[2]; 
+			case 2: pieces = new String[3]; 
 					for (i = 0; i < 2; i++)
 					{
 						pieces[i] = str.substring(4 * i, 4 + 4 * i);
 					}
+					pieces[2] = str.substring(9, 11);
 					break;
-			case 3: pieces = new String[3]; 
+			case 3: pieces = new String[4]; 
 					for (i = 0; i < 3; i++)
 					{
 						pieces[i] = str.substring(4 * i, 4 + 4 * i);
 					}
+					pieces[3] = str.substring(13, 15);
 					break;
-			case 4: pieces = new String[4]; 
+			case 4: pieces = new String[5]; 
 					for (i = 0; i < 4; i++)
 					{
 						pieces[i] = str.substring(4 * i, 4 + 4 * i);
 					}
+					pieces[4] = str.substring(17, 19);
 					break;
 			default: 
 				 	System.out.println("Error: The number can not be cutted into pieces!");
@@ -97,30 +131,34 @@ public class Change {
 //			System.out.println("firstStringEnd is " + firstStringEnd);
 			switch(numberOfPieces)
 			{
-			case 0: pieces = new String[1]; 
-					pieces[0] = str.substring(0, numberFirstString);					
+			case 0: pieces = new String[2]; 
+					pieces[0] = str.substring(0, numberFirstString);
+					pieces[1] = str.substring(numberFirstString + 1, numberFirstString + 3);
 					break;
-			case 1: pieces = new String[2]; 
+			case 1: pieces = new String[3]; 
 					pieces[0] = str.substring(0, numberFirstString);
 //					System.out.println("FirstString is " + pieces[0]);
 				 	for (i = 1; i < 2; i++)
 				 	{
 				 		pieces[i] = str.substring(numberFirstString + 4 * i - 4, numberFirstString + 4 * i);
 				 	}
+				 	pieces[2] = str.substring(numberFirstString + 4 * (i - 1) + 1, numberFirstString + 4 * (i - 1) + 3);
 				 	break;
-			case 2: pieces = new String[3]; 
+			case 2: pieces = new String[4]; 
 					pieces[0] = str.substring(0, numberFirstString);
 					for (i = 1; i < 3; i++)
 					{
 						pieces[i] = str.substring(numberFirstString + 4 * i - 4, numberFirstString + 4 * i);
 					}
+					pieces[3] = str.substring(numberFirstString + 4 * (i - 1) + 1, numberFirstString + 4 * (i - 1) + 3);
 					break;
-			case 3: pieces = new String[4]; 
+			case 3: pieces = new String[5]; 
 					pieces[0] = str.substring(0, numberFirstString);
 					for (i = 1; i < 4; i++)
 					{
 						pieces[i] = str.substring(numberFirstString + 4 * i - 4, numberFirstString + 4 * i);
 					}
+					pieces[4] = str.substring(numberFirstString + 4 * (i - 1) + 1, numberFirstString + 4 * (i - 1) + 3);
 					break;
 			}
 		}
@@ -137,11 +175,19 @@ public class Change {
 		char[] chr;
 		if (str.length() != 1)
 		{
-			System.out.println("Error:Input not 2 letters!");
+			System.out.println("Error:Input not 1 letter!");
 			return null;
 		}
 		chr = str.toCharArray();
-		reading = Number0_9.getName(chr[0] - '0');
+		if (chr[0] == '0')
+		{
+			this.yuan = true;
+			return reading;
+		}
+		else
+		{
+			reading = Number0_9.getName(chr[0] - '0');
+		}
 		return reading;
 	}
 	
@@ -160,12 +206,14 @@ public class Change {
 		{
 			reading = Number0_9.getName(chr[0] - '0');
 			reading += "拾";
+			this.tag = true;
 		}
 		else
 		{
 			reading = Number0_9.getName(chr[0] - '0');
 			reading += "拾";
 			reading += Number0_9.getName(chr[1] - '0');
+			this.tag = false;
 		}
 		return reading;
 	}
@@ -186,6 +234,7 @@ public class Change {
 			chr = str.toCharArray();
 			reading += Number0_9.getName(chr[0] - '0');
 			reading += "佰";
+			this.tag = true;
 		}
 		else if (matching(str, Y + Y + "0"))
 		{
@@ -203,6 +252,7 @@ public class Change {
 					reading += ChineseRead.getName(i + 1);
 				}
 			}
+			this.tag = true;
 		}
 		else
 		{
@@ -220,6 +270,7 @@ public class Change {
 					reading += ChineseRead.getName(i + 1);
 				}
 			}
+			this.tag = false;
 		}
 		return reading;
 	}
@@ -231,30 +282,41 @@ public class Change {
 		char[] chr;
 		if (str.compareTo("0000") == 0)
 		{
-			;
+			this.tag = true;
 		}
 		else if (matching(str, Y + "000"))
 		{
 			chr = str.toCharArray();
 			reading += Number0_9.getName(chr[0] - '0');
 			reading += "仟";
+			this.tag = true;
 		}
 		else if (matching(str, "000" + Y))
 		{
 			chr = str.toCharArray();
-			reading += "零";
+			
+			// "萬"后面没有自动加零
+			if (this.tag == false)
+			{
+				reading += "零";
+			}
 			reading += Number0_9.getName(chr[3] - '0');
+			this.tag = false;
 		}
 		else if (matching(str, "00" + Y + X))
 		{
 			chr = str.toCharArray();
-			reading += "零";
+			if (this.tag == false)
+			{
+				reading += "零";
+			}
 			reading += Number0_9.getName(chr[2] - '0');
 			reading += "拾";
 			if (chr[3] != '0')
 			{
 				reading += Number0_9.getName(chr[3] - '0');
 			}
+			this.tag = false;
 		}
 		else if (matching(str, Y + "00" + Y))
 		{
@@ -262,11 +324,12 @@ public class Change {
 			reading += Number0_9.getName(chr[0] - '0');
 			reading += "仟零";
 			reading += Number0_9.getName(chr[3] - '0');
+			this.tag = false;
 		}
 		else if (matching(str, X + Y + "00"))
 		{
 			chr = str.toCharArray();
-			if (chr[0] == '0')
+			if (chr[0] == '0' && this.tag == false)
 			{
 				reading += "零";
 			}
@@ -277,6 +340,7 @@ public class Change {
 			}
 			reading += Number0_9.getName(chr[1] - '0');
 			reading += "佰";
+			this.tag = true;
 		}
 		else if (matching(str, X + X + X + "0"))
 		{
@@ -284,7 +348,7 @@ public class Change {
 			int i = 0;
 			for (i = 0; i < 3; i++)
 			{
-				if (chr[i] == '0')
+				if (chr[i] == '0' && this.tag == false)
 				{
 					reading += Number0_9.getName(chr[i] - '0');
 				}
@@ -294,6 +358,7 @@ public class Change {
 					reading += ChineseRead.getName(i);
 				}
 			}
+			this.tag = true;
 		}
 		else
 		{
@@ -330,13 +395,54 @@ public class Change {
 		return reading;
 	}
 	
+	// 小数点后的读法
+	public String reading_Last(String str)
+	{
+		String reading = "";
+		if (str.length() != 2)
+		{
+			System.out.println("Reading_Last length error:");
+			System.exit(-1);
+		}
+		if (str.compareTo("00") == 0)
+		{
+			reading += "整";
+			return reading;
+		}
+		else if (matching(str, Y + "0"))
+		{
+			char[] chr = str.toCharArray();
+			reading += Number0_9.getName(chr[0] - '0');
+			reading += "角";
+		}
+		else if (matching(str, "0" + Y))
+		{
+			char[] chr = str.toCharArray();
+			reading += "零";
+			reading += Number0_9.getName(chr[1] - '0');
+			reading += "分";
+		}
+		else
+		{
+			char[] chr = str.toCharArray();
+			reading += Number0_9.getName(chr[0] - '0');
+			reading += "角";
+			reading += Number0_9.getName(chr[1] - '0');
+			reading += "分";
+		}
+		return reading;
+	}
+	
 	// 总的转换过程
 	public void getResult()
 	{
 		String str = this.input;
 		String reading = "";
 		String[] pieces = this.cuttingIntoPieces(str);
-		int numberOfP = pieces.length;
+		
+		// 小数点后的单独处理， 这里仅仅表示的是小数点前面的能被切成多少份
+		int numberOfP = pieces.length - 1;
+		
 		int n = pieces[0].length();
 		int i = 0;
 		
@@ -346,6 +452,8 @@ public class Change {
 			System.out.println("Error: checkInput error!");
 			System.exit(-1);
 		}
+		
+		reading += "人民币";
 		
 		// 先处理pieces[0]
 		switch (n)
@@ -364,32 +472,56 @@ public class Change {
 		{
 		case 1: break;
 		case 2: reading += "萬";
+				if (this.tag == true)
+				{
+					reading += "零";
+				}
 				for (i = 1; i < numberOfP; i++)
 				{
 					reading += this.reading4(pieces[i]);
 				}
 				break;
 		case 3: reading += "億";
+				if (this.tag == true)
+				{
+					reading += "零";
+				}
 				for (i = 1; i < numberOfP; i++)
 				{
 					reading += this.reading4(pieces[i]);
 					if (i == 1)
 					{
 						reading += "萬";
+						if (this.tag == true)
+						{
+							reading += "零";
+						}
 					}
 				}
 				break;
 		case 4: reading += "萬";
+				if (this.tag == true)
+				{
+					reading += "零";
+				}
 				for (i = 1; i < numberOfP; i++)
 				{
 					reading += this.reading4(pieces[i]);
 					if (i == 1)
 					{
 						reading += "億";
+						if (this.tag == true)
+						{
+							reading += "零";
+						}
 					}
 					else if (i == 2)
 					{
 						reading += "萬";
+						if (this.tag == true)
+						{
+							reading += "零";
+						}
 					}
 					else
 					{
@@ -399,6 +531,14 @@ public class Change {
 				break;
 		default: System.out.println("Error: the numberOfP is not 1, 2, 3, 4");
 		}
+		
+		// 不是0.23的情况
+		if (this.yuan == false)
+		{
+			reading += "圆";
+		}
+		
+		reading += this.reading_Last(pieces[numberOfP]);
 		this.result = reading;
 	}
 	

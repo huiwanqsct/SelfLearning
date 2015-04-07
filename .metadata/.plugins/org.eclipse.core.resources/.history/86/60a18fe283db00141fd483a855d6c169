@@ -1,0 +1,6 @@
+package self.exercise;
+
+public class MaxInMatrix <E extends Number>{
+	public static <E extends Comparable<E>> E max(E[][] list);
+
+}

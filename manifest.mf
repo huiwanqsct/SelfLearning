@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+
+Main-Class: self.chinese.main.NumberReading
+
+Class-Path: 
+
+
