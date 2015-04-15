@@ -1,0 +1,23 @@
+package self.learning;
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class TestHashMap1 {
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		while (true)
+		{
+			
+		}
+		int i = 0;
+		Map<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+		for (i = 0; i < inputN.length; i++)
+		{
+			
+		}
+		hashMap.put(key, value)
+	}
+}

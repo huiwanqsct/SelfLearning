@@ -1,0 +1,17 @@
+package self.learning;
+
+public class WordOccurrence implements Comparable{
+	private String word;
+	private Integer count;
+	public WordOccurrence()
+	{
+		word = null;
+		count = null;
+	}
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

@@ -1,0 +1,25 @@
+package self.learning;
+
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class TestTransform {
+	private Image image = null;
+	public TestTransform(String inputFile)
+	{
+		try {
+			this.image = ImageIO.read(new File(inputFile));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("read image error!");
+			e.printStackTrace();
+		}
+	}
+	public static void main(String[] args)
+	{
+		
+	}
+}

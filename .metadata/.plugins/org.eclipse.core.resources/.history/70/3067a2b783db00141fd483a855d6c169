@@ -1,6 +1,0 @@
-package self.exercise;
-
-public class MaxInMatrix <E extends Number>{
-	
-
-}

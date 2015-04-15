@@ -1,0 +1,17 @@
+package self.learning;
+
+import java.awt.Image;
+
+import javax.imageio.ImageIO;
+
+public class TestTransform {
+	private Image image = null;
+	public TestTransform(String inputFile)
+	{
+		this.image = ImageIO.read(inputFile);
+	}
+	public static void main(String[] args)
+	{
+		
+	}
+}

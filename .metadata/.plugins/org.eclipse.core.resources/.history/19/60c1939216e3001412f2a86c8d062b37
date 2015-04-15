@@ -1,0 +1,11 @@
+package self.learning;
+
+public class ImageCompress {
+	private int newW;
+	private int newH;
+	
+	public static void main(String[] args)
+	{
+		
+	}
+}

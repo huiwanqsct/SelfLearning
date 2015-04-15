@@ -1,0 +1,39 @@
+package self.learning;
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class TestHashMap1 {
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		Map<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+		System.out.println("Please input a line (exit with 0): ");
+		int number = 0;
+		while (true)
+		{
+			try
+			{
+				number = Integer.parseInt(sc.nextLine());
+				if (number == 0)
+				{
+					break;
+				}
+				else
+				{
+					if (hashMap.containsKey(number))
+					{
+						hashMap.put(number, hashMap.get(number) + 1);
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				System.out.println("Input Error: reinput!");
+				continue;
+			}
+		}
+		hashMap.put(key, value)
+	}
+}

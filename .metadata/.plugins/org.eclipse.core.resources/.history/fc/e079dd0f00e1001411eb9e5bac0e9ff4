@@ -1,0 +1,25 @@
+package self.learning;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class TestHashSet {
+	public static void main(String[] args)
+	{
+		Set<String> setA = new HashSet<String>();
+		Set<String> setB = new HashSet<String>();
+		setA.add("George");
+		setA.add("Jim");
+		setA.add("John");
+		setA.add("Blake");
+		setA.add("Kevin");
+		setA.add("Mechael");
+		
+		setB.add("George");
+		setB.add("Katie");
+		setB.add("Kevin");
+		setB.add("Michelle");
+		setB.add("Ryan");
+		setB.add("Mechael");
+	}
+}

@@ -1,0 +1,18 @@
+package self.learning;
+
+import java.awt.image.BufferedImage;
+
+public class ImageCompress {
+	private int newW;
+	private int newH;
+	private BufferedImage bufferedImage;
+	public static void main(String[] args)
+	{
+		String fileExtendName =  
+	}
+	public String getExtendName(String fileName)
+	{
+		String fileExtendName = fileName.substring(fileName.indexOf(".") + 1);
+		return fileExtendName;
+	}
+}

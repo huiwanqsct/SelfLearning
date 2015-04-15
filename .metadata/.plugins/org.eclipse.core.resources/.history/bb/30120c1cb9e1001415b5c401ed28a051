@@ -1,0 +1,31 @@
+package self.learning;
+
+import java.util.TreeMap;
+
+public class CountOccurenceOfWords {
+	public static void main(String[] args[])
+	{
+		String text = "Good morning. Have a good class. " + "Have a good visit. Have fun!";
+		TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+		String[] words = text.split("[ \n\t\r.,;:!?(){]");
+		for (int i = 0; i < words.length; i++)
+		{
+			// 大小写无关
+			String key = words[i].toLowerCase();
+			if (key.length() > 0)
+			{
+				// 对应的key没有查到值
+				if (map.get(key) == null)
+				{
+					map.put(key, 1);
+				}
+				else
+				{
+					// Integer -> int
+					map.put(key, map.get(key).intValue() + 1);
+				}
+			}
+		}
+		Set<Map>
+	}
+}

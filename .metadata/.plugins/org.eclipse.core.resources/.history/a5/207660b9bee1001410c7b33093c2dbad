@@ -1,0 +1,7 @@
+package self.learning;
+
+import java.util.Comparator;
+
+public class WordOccurrence implements Comparable{
+
+}

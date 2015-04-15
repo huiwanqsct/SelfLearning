@@ -1,0 +1,29 @@
+package self.learning;
+
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+
+
+public class ImageCompress {
+	private int newW;
+	private int newH;
+	private BufferedImage bufferedImage;
+	public ImageCompress()
+	{
+		this.newH = 0;
+		this.newW = 0;
+		this.bufferedImage = null;
+	}
+	public ImageCompress(int newW, int newH)
+	{
+		this.newH = newH;
+		this.newW = newW;
+		this.bufferedImage = ImageIO.read(")
+	}
+	public static void main(String[] args)
+	{
+		String fileName = "java.jpg";
+		String fileExtendName = fileName.substring(fileName.indexOf(".") + 1);
+	}
+	
+}

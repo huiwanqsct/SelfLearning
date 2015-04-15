@@ -1,0 +1,44 @@
+package self.learning;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+
+public class ImageCompress {
+	private int newW;
+	private int newH;
+	private BufferedImage bufferedImage;
+	public ImageCompress()
+	{
+		this.newH = 0;
+		this.newW = 0;
+		this.bufferedImage = null;
+	}
+	public ImageCompress(int newW, int newH)
+	{
+		this.newH = newH;
+		this.newW = newW;
+		try {
+			this.bufferedImage = ImageIO.read(new File("java.jpg"));
+			throw new IOException();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Image read error!");
+			e.printStackTrace();
+		}
+	}
+	public void compress()
+	{
+		this.newH = this.newH/4;
+		this.newW = this.newW/4;
+	}
+	public static void main(String[] args)
+	{
+		String fileName = "java.jpg";
+		String fileExtendName = fileName.substring(fileName.indexOf(".") + 1);
+	}
+	
+}

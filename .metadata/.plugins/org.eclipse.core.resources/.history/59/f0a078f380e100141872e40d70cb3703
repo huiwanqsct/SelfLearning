@@ -1,0 +1,13 @@
+package self.learning;
+
+import java.util.Map;
+import java.util.HashMap;
+
+public class TestHashMap1 {
+	public static void main(String[] args)
+	{
+		Integer[] inputN = {2, 3, 40, 3, 5, 4, -3, 3, 3, 2, 0};
+		Map<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+		hashMap.put(key, value)
+	}
+}
